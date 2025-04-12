@@ -6,7 +6,7 @@ from sklearn import metrics
 
 
 model = pickle.load(open('model_pkl_svc_latest', 'rb'))
-
+scale = pickle.load(open('scale_svc_latest', 'rb'))
 # App Title
 st.title("Hello DOC 🩺!")
 
@@ -57,7 +57,8 @@ if mode == "Single User":
     st.write('Click on know your diabetes button to get you diabetes status.')
     # Get model response
     if st.button("know your diabetes"):
-        predictions = model.predict_proba(input_df)[:,1]
+        input_df_scaled=scale.fit_transform(input_df)
+        predictions = model.predict_proba(input_df_scaled)[:,1]
 
         #st.subheader("Model Output")
         predictions = [0 if (y<0.5)else 1 for y in predictions]
@@ -91,8 +92,8 @@ else:
         if st.button("know your diabetes"):
             try:
                 #input_data = df.drop('Diabetes_binary', axis=1)  # Drop target column if present
-
-                predictions = model.predict_proba(input_data)[:,1]
+                input_df_scaled = scale.fit_transform(input_data)
+                predictions = model.predict_proba(input_df_scaled)[:,1]
                 #auc = metrics.roc_auc_score(y, predictions)
                 predictions = [0 if (y<0.5)else 1 for y in predictions]
                 st.subheader("Your Diabetes status:")
