@@ -94,10 +94,10 @@ else:
                 #input_data = df.drop('Diabetes_binary', axis=1)  # Drop target column if present
                 input_df_scaled = scale.fit_transform(input_data)
                 predictions = model.predict_proba(input_df_scaled)[:,1]
-                #auc = metrics.roc_auc_score(y, predictions)
+                auc = metrics.roc_auc_score(y, predictions)
                 predictions = [0 if (y<0.5)else 1 for y in predictions]
                 st.subheader("Your Diabetes status:")
-                #print(predictions)
+                print(auc)
                 st.write("This is batch testing- Pls download the predicted status by clicking on below button")
 
             except Exception as e:
