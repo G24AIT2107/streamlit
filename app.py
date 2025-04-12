@@ -11,7 +11,7 @@ scale = pickle.load(open('scale_svc_latest', 'rb'))
 st.title("Hello DOC 🩺!")
 
 # Select mode
-mode = st.radio("Choose Input Method", ["Single User", "CSV Upload"])
+mode = st.radio("Choose Input Method", ["Single User", "CSV Upload (Batch-processing)"])
 
 # Single User mode
 if mode == "Single User":
