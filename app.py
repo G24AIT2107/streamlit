@@ -59,7 +59,7 @@ if mode == "Single User":
     if st.button("know your diabetes"):
         predictions = model.predict_proba(input_df)[:,1]
 
-        st.subheader("Model Output")
+        #st.subheader("Model Output")
         predictions = [0 if (y<0.5)else 1 for y in predictions]
         st.subheader("Your Diabetes status:")
         #print(predictions)
